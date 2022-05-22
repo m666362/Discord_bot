@@ -37,7 +37,9 @@ commandHandlerForCommandName["addpayment"] = {
     const amount = parseFloat(args[1]);
     const guild = msg.channel.guild;
     const userId = mention.replace(/<@(.*?)>/, (match, group1) => group1);
-    const member = guild?.members?.get(userId);
+    // const member = guild?.members?.get(userId);
+    console.log({guild, userId});
+    console.log("mem", msg?.channel?.guild?.member);
 
     return Promise.all([
       msg.reply(`${mention} paid $${amount.toFixed(2)}`),

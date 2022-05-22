@@ -10,6 +10,7 @@ client.on("ready", () => {
 
 client.on("message", async (msg) => {
   // Check bot is mentioned or not
+  console.log("checking", client.user.id);
   const wasBotMentioned = msg?.mentions?.users?.get(client.user.id)
     ? true
     : false;
