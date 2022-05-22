@@ -1,4 +1,5 @@
 const { newRole } = require("./Constant");
+const updateMemberRoleForDonation = require("./HelperFunction");
 
 const commandHandlerForCommandName = {};
 commandHandlerForCommandName["present"] = (msg) => {
@@ -34,8 +35,15 @@ commandHandlerForCommandName["addpayment"] = {
   execute: (msg, args) => {
     const mention = args[0];
     const amount = parseFloat(args[1]);
+    const guild = msg.channel.guild;
+    const userId = mention.replace(/<@(.*?)>/, (match, group1) => group1);
+    const member = guild?.members?.get(userId);
 
-    return msg.reply(`${mention} paid $${amount.toFixed(2)}`);
+    return Promise.all([
+      msg.reply(`${mention} paid $${amount.toFixed(2)}`),
+      // updateMemberRoleForDonation(guild, member, amount)
+    ])
+
   },
 };
 
