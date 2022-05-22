@@ -24,9 +24,19 @@ commandHandlerForCommandName["commandNotMentioned"] = (msg) => {
   try {
     return msg.reply("Command missing. Please check documentation");
   } catch (error) {
-    console.warn("Failed to respond to mention.");
+    // console.warn("Failed to respond to mention.");
     console.warn(error);
   }
+};
+
+commandHandlerForCommandName["addpayment"] = {
+  botOwnerOnly: true,
+  execute: (msg, args) => {
+    const mention = args[0];
+    const amount = parseFloat(args[1]);
+
+    return msg.reply(`${mention} paid $${amount.toFixed(2)}`);
+  },
 };
 
 module.exports = commandHandlerForCommandName;
