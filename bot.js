@@ -6,25 +6,24 @@ const Discord = require("discord.js");
 const { Client, Collection, Intents } = require("discord.js");
 const { token } = require("./config.json");
 
-const client = new Client({ intents: [Intents.FLAGS.GUILDS] });
+// const client = new Client({ intents: [Intents.FLAGS.GUILDS] });
+let client = new Discord.Client({partials: ['MESSAGE', 'CHANNEL', 'REACTION'], intents: [Intents.FLAGS.GUILDS]});
 
-client.commands = new Collection();
-client.events = new Collection();
+
+client.commands = new Discord.Collection();
+client.events = new Discord.Collection();
 
 const handlerPath = path.join(__dirname, "handler");
 const handlerFiles = fs
   .readdirSync(handlerPath)
   .filter((file) => file.endsWith(".js"));
 
-  handlerFiles.forEach(file=>{})
+console.log(handlerPath,handlerFiles);
 
-// for (const file of commandFiles) {
-//   const filePath = path.join(commandsPath, file);
-//   const command = require(filePath);
-//   // Set a new item in the Collection
-//   // With the key as the command name and the value as the exported module
-//   client.commands.set(command.data.name, command);
-// }
+for (const file of handlerFiles) {
+  const filePath = path.join(handlerPath, file);
+  require(filePath)(client, Discord);
+}
 
 // ["command_handler", "event_handler"].forEach(handler=>{
 // 	require(`./handler/${handler}`)(client, Discord)
