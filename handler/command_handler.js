@@ -16,7 +16,6 @@ module.exports = (client, Discord) => {
     .filter((file) => file.endsWith(".js"));
 
   const commands = [];
-  console.log(commandPath, commandFiles);
   for (const file of commandFiles) {
     const filePath = path.join(commandPath, file);
     const command = require(filePath);

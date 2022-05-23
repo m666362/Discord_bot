@@ -1,10 +1,6 @@
-const { client } = require("../bot");
-
-// const { client } = require("./../bot");
 module.exports = {
   name: "interactionCreate",
   async execute(interaction, client) {
-    // const {interaction, client} = {...args}
     if (!interaction.isCommand()) return;
 
     const command = client.commands.get(interaction.commandName);

@@ -7,7 +7,6 @@ module.exports = (client, Discord) => {
     .readdirSync(eventPath)
     .filter((file) => file.endsWith(".js"));
 
-  console.log(eventPath, eventFiles);
   for (const file of eventFiles) {
     const filePath = path.join(eventPath, file);
     const event = require(filePath);
